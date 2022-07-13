@@ -1,50 +1,30 @@
 <template>
   <div class="home pa-6">
-    <h1>Todo Page</h1>
+    <h2>Todo Page</h2>
   </div>
   <v-container fluid>
-          <v-card
-            border
-            class="mb-2"
-            density="compact"
-            subtitle="Salsa, merengue, y cumbia"
-            title="Todo Title"
-            variant="text"
-          >
-            <v-img src="https://picsum.photos/512/128?image=660" height="128" cover></v-img>
+      <v-card
+        v-for="task in tasks"
+        :key="task.id"
+        border
+        class="mb-2"
+        density="compact"
+        subtitle v-bind:text="task.subTitle"
+        v-bind:title="task.taskTitle"
+        variant="text"
+      >
+        <v-img v-bind:src="task.photoImages" height="128" cover></v-img>
 
-            <v-card-text>
-              During my last trip to South America, I spent 2 weeks traveling through Patagonia in Chile. 
-            </v-card-text>
+        <v-card-text>{{ task.textComents }}</v-card-text>
 
-            <template v-slot:actions>
-              <v-btn color="primary" variant="text">View More</v-btn>
-
-              <v-btn color="primary" variant="text">See in Map</v-btn>
-            </template>
-          </v-card>
-
-          <v-card
-            border
-            density="comfortable"
-            prepend-avatar="https://randomuser.me/api/portraits/women/17.jpg"
-            subtitle="Salsa, merengue, y cumbia"
-            title="Florida"
-            variant="text"
-          >
-            <v-img src="https://picsum.photos/512/128?random" height="128" cover></v-img>
-
-            <v-card-text>
-              During my last trip to Florida, I spent 2 weeks traveling through the Everglades.
-            </v-card-text>
-
-            <template v-slot:actions>
-              <v-btn color="primary" variant="text">View More</v-btn>
-
-              <v-btn color="primary" variant="text">See in Map</v-btn>
-            </template>
-          </v-card>
-        </v-container>
+        <template v-slot:actions>
+          <v-btn color="primary" variant="text">View More</v-btn>
+          <v-btn color="primary" variant="text">Complete</v-btn>
+          <v-btn color="primary" variant="text">Delete</v-btn>
+          <!-- <v-card-text>{{ new Date() }}</v-card-text> -->
+        </template>
+      </v-card>
+    </v-container>
   <v-footer
     class="bg-grey-lighten-1"
   >
@@ -84,11 +64,26 @@
       ],
       tasks: [
         {
+          taskId: 1,
           taskTitle:"Wake up",
-          subTitle: "Salsa, merengue, y cumbia",
+          subTitle: "It is starting in a Good day",
+          photoImages: "https://picsum.photos/512/128?image=660",
+          textComents: "If you wake up earliy, you get something you unexpected."
+        },
+        {
+          taskId: 2,
+          taskTitle:"Study AWS",
+          subTitle: "you should study cloudService in AWS",
           photoImages: "https://picsum.photos/512/128?random",
-          textComents: "During my last trip to Florida, I spent 2 weeks traveling through the Everglades."
-        }
+          textComents: "you look around, CloudService run anywhere."
+        },
+        {
+          taskId: 3,
+          taskTitle:"Program in TypeScript",
+          subTitle: "It is important to keep typping in laung",
+          photoImages: "https://picsum.photos/512/128?image=660",
+          textComents: "you code in Vue, you must undersatand it in Typescript."
+        },
       ]
     }),
   }
