@@ -1,38 +1,70 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer
+  <!-- <v-app id="inspire"> -->
+    <v-card>
+      <v-layout>
+      <v-app-bar
+        color="primary"
+        prominent
+      >
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>Vuetify Todo App</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn variant="text" icon="mdi-magnify"></v-btn>
+
+        <v-btn variant="text" icon="mdi-filter"></v-btn>
+
+        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+      </v-app-bar>
+      <!-- <v-app-bar app>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>Application</v-toolbar-title>
+      </v-app-bar> -->
+      <v-navigation-drawer
         v-model="drawer"
         bottom
         temporary
       >
-      <v-list-item>
-        <!-- <v-list-item-content> -->
+      <v-list density="compact">
+        <v-list-item-header>
           <v-list-item-title class="text-h6">
-            Application
+            Vuetify Todo
           </v-list-item-title>
           <v-list-item-subtitle>
-            subtext
+            To use Camera for your TODO
           </v-list-item-subtitle>
-        <!-- </v-list-item-content> -->
-      </v-list-item>
-      <v-list
-        :items="items"
-      ></v-list>
-    </v-navigation-drawer>
+        </v-list-item-header>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :value="item"
+          :to="item.to"
+          active-color="primary"
+          >
+          <v-list-item-avatar start>
+            <v-icon :icon="item.icon"></v-icon>
+          </v-list-item-avatar>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item>
+      </v-list>
+      </v-navigation-drawer>
+      <v-main>
+        <v-card-text>
+          The navigation drawer will appear from the bottom on smaller size screens.
+        </v-card-text>
+        <router-view></router-view>
+      </v-main>
+      </v-layout>
+      <!-- <v-main style="height: 250px"></v-main> -->
+    </v-card>
+    
 
     <!-- <v-navigation-drawer permanent
       v-model="drawer"
       app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
 
       <v-divider></v-divider>
 
@@ -55,19 +87,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
-
-    <v-main>
-      <!-- <div v-if="iconName !== ''">
-        <v-icon large color="blue-grey darken-2">{{ iconName }}</v-icon> 
-      </div> -->
-    </v-main>
-  </v-app>
+  <!-- </v-app> -->
 </template>
 
 <script>
@@ -91,9 +111,8 @@
       // },
       drawer: null,
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Photos', icon: 'mdi-image' },
-        { title: 'About', icon: 'mdi-help-box' },
+        { title:'Todo', icon:'mdi-help-box', to:'/' },
+        { title:'Photos', icon:'mdi-image', to:'/photo' },
       ],
       // iconType: {
       //   type: String,
