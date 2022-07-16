@@ -6,7 +6,7 @@
         color="primary"
         prominent
       >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon variant="text" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Vuetify Todo App</v-toolbar-title>
 
