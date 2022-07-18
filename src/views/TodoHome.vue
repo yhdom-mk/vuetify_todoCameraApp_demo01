@@ -2,8 +2,16 @@
   <div class="home pa-6">
     <h2>Todo Page</h2>
   </div>
+  
+  <div class="px-4">
+    <v-text-field
+      variant="underlined"
+      label="Todo"
+      append-icon="mdi-plus"
+    ></v-text-field>
+  </div>
+ 
   <v-container fluid>
-    
       <v-card
         v-for="task in tasks"
         :key="task.id"
@@ -20,15 +28,30 @@
         <v-btn color="primary" variant="text">View More</v-btn>            
 
         <template v-slot:actions>
-          <v-card @click="doneTask(task.taskId)">
-            <div class="d-flex justify-end">
+          <v-card
+            @click="doneTask(task.taskId)"
+            class="mx-auto"
+            width="auto">
+            
+            <!-- <v-list-item-header>
               <v-checkbox
                 :input-value="task.done"
                 color="primary"
               ></v-checkbox>
-              <v-btn color="primary" variant="text">Complete</v-btn>
-              <v-btn color="primary" variant="text">Delete</v-btn>
-              <!-- <v-card-text>{{ new Date() }}</v-card-text> -->
+            </v-list-item-header> -->
+            <div class="px-4">
+              <v-chip-group v-model="selection">
+                <v-chip>0%</v-chip>
+                <v-chip>25%</v-chip>
+                <v-chip>50%</v-chip>
+                <v-chip>75%</v-chip>
+                <v-chip>100%</v-chip>
+                <!-- <div class="d-flex justify-end"> -->
+                  <v-btn color="red" variant="text">Delete
+                    <v-icon icon="mdi-delete"></v-icon>
+                  </v-btn>
+                <!-- </div> -->
+              </v-chip-group>
             </div>
           </v-card>
         </template>
@@ -74,7 +97,7 @@
       tasks: [
         {
           taskId: 1,
-          taskTitle:"Wake up",
+          taskTitle:"Wake up early, for three weeks",
           subTitle: "It is starting in a Good day",
           photoImages: "https://picsum.photos/512/128?image=660",
           textComents: "If you wake up earliy, you get something you unexpected.",
@@ -96,7 +119,8 @@
           textComents: "you code in Vue, you must undersatand it in Typescript.",
           done: true
         },
-      ]
+      ],
+      selection: 1
     }),
     methods: {
       doneTask(id) {
