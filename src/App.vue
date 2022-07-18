@@ -16,7 +16,7 @@
 
         <v-btn variant="text" icon="mdi-filter"></v-btn>
 
-        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+        <v-btn variant="text" icon="mdi-plus"></v-btn>
       </v-app-bar>
       <!-- <v-app-bar app>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -52,9 +52,9 @@
       </v-list>
       </v-navigation-drawer>
       <v-main>
-        <v-card-text>
+        <!-- <v-card-text>
           The navigation drawer will appear from the bottom on smaller size screens.
-        </v-card-text>
+        </v-card-text> -->
         <router-view></router-view>
       </v-main>
       </v-layout>
