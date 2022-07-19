@@ -5,58 +5,68 @@
   
   <div class="px-4">
     <v-text-field
+      v-model="newTaskTitle"
+      @click:append="addTask"
+      @keyup.enter="addTask"
+      class="pa-3"
       variant="underlined"
       label="Todo"
       append-icon="mdi-plus"
+      hide-details="true"
+      clearable
     ></v-text-field>
   </div>
  
   <v-container fluid>
-      <v-card
-        v-for="task in tasks"
-        :key="task.id"
-        :class="{ 'indigo lighten-5': task.done }"
-        border
-        class="mb-2"
-        density="compact"
-        subtitle v-bind:text="task.subTitle"
-        v-bind:title="task.taskTitle"
-        variant="text"
-      >
-        <v-card-text>{{ task.textComents }}</v-card-text>
-        <v-img v-bind:src="task.photoImages" height="128" cover></v-img>
-        <v-btn color="primary" variant="text">View More</v-btn>            
+    <v-card
+      v-for="task in tasks"
+      :key="task.id"
+      :class="{ 'indigo lighten-5': task.done }"
+      border
+      class="mb-2"
+      density="compact"
+      subtitle v-bind:text="task.subTitle"
+      v-bind:title="task.taskTitle"
+      variant="text"
+    >
+      <v-card-text>{{ task.textComents }}</v-card-text>
+      <v-img v-bind:src="task.photoImages" height="128" cover></v-img>
+      <v-btn color="primary" variant="text">View More</v-btn>            
 
-        <template v-slot:actions>
-          <v-card
-            @click="doneTask(task.taskId)"
-            class="mx-auto"
-            width="auto">
-            
-            <!-- <v-list-item-header>
-              <v-checkbox
-                :input-value="task.done"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-header> -->
-            <div class="px-4">
-              <v-chip-group v-model="selection">
-                <v-chip>0%</v-chip>
-                <v-chip>25%</v-chip>
-                <v-chip>50%</v-chip>
-                <v-chip>75%</v-chip>
-                <v-chip>100%</v-chip>
-                <!-- <div class="d-flex justify-end"> -->
-                  <v-btn color="red" variant="text">Delete
-                    <v-icon icon="mdi-delete"></v-icon>
-                  </v-btn>
-                <!-- </div> -->
-              </v-chip-group>
-            </div>
-          </v-card>
-        </template>
-      </v-card>
-    </v-container>
+      <template v-slot:actions>
+        <v-card
+          @click="doneTask(task.taskId)"
+          class="mx-auto"
+          width="auto">
+          
+          <!-- <v-list-item-header>
+            <v-checkbox
+              :input-value="task.done"
+              color="primary"
+            ></v-checkbox>
+          </v-list-item-header> -->
+          <div class="px-4">
+            <v-chip-group v-model="selection">
+              <v-chip>0%</v-chip>
+              <v-chip>25%</v-chip>
+              <v-chip>50%</v-chip>
+              <v-chip>75%</v-chip>
+              <v-chip>100%</v-chip>
+              <!-- <div class="d-flex justify-end"> -->
+              <v-btn
+                color="red"
+                variant="text"
+                @click="deleteTask"
+                >Delete
+                <v-icon icon="mdi-delete"></v-icon>
+              </v-btn>
+              <!-- </div> -->
+            </v-chip-group>
+          </div>
+        </v-card>
+      </template>
+    </v-card>
+  </v-container>
   <v-footer
     class="bg-grey-lighten-1"
   >
@@ -94,6 +104,7 @@
         'Blog',
         'Contact Us',
       ],
+      newTaskTitle: '',
       tasks: [
         {
           taskId: 1,
@@ -127,6 +138,22 @@
         let task = this.tasks.filter(task => task.taskId === id)[0]
         task.done = !task.done
         // console.log(taskId);
+      },
+      addTask() {
+        let newTask = {
+          taskId: Date.now(),
+          taskTitle: this.newTaskTitle,
+          subTitle: "It is important to keep typping in laung",
+          photoImages: "https://picsum.photos/512/128?random",
+          textComents: "you code in Vue, you must undersatand it in Typescript.",
+          done: false
+        }
+        this.tasks.push(newTask)
+        // console.log('add Task');
+        console.log(newTask);
+      },
+      deleteTask(id) {
+        this.tasks = this.tasks.filter(task => task.taskId !== id)
       }
     }
   }
