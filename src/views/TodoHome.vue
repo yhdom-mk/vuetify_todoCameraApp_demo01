@@ -31,13 +31,35 @@
     >
       <v-card-text>{{ task.textComents }}</v-card-text>
       <v-img v-bind:src="task.photoImages" height="128" cover></v-img>
-      <v-btn color="primary" variant="text">View More</v-btn>            
-
-      <template v-slot:actions>
+      <v-btn color="primary" variant="text">View More</v-btn>
+      <div class="px-4">
+        <v-chip-group v-model="selection">
+          <v-chip>0%</v-chip>
+          <v-chip>25%</v-chip>
+          <v-chip>50%</v-chip>
+          <v-chip>75%</v-chip>
+          <v-chip>100%</v-chip>
+          <!-- <div class="d-flex justify-end"> -->
+          
+          <!-- </div> -->
+        </v-chip-group>
+        <div class="d-flex justify-end">
+          <v-btn
+            class="px-4"
+            @click="deleteTask"
+            color="red"
+            variant="text"
+            >Delete
+            <v-icon icon="mdi-delete"></v-icon>
+          </v-btn>  
+        </div>
+      </div>
+      
+      <!-- <template v-slot:actions>
         <v-card
           @click="doneTask(task.taskId)"
           class="mx-auto"
-          width="auto">
+          width="auto"> -->
           
           <!-- <v-list-item-header>
             <v-checkbox
@@ -45,26 +67,21 @@
               color="primary"
             ></v-checkbox>
           </v-list-item-header> -->
-          <div class="px-4">
+
+          <!-- <div class="px-4">
             <v-chip-group v-model="selection">
               <v-chip>0%</v-chip>
               <v-chip>25%</v-chip>
               <v-chip>50%</v-chip>
               <v-chip>75%</v-chip>
-              <v-chip>100%</v-chip>
+              <v-chip>100%</v-chip> -->
               <!-- <div class="d-flex justify-end"> -->
-              <v-btn
-                color="red"
-                variant="text"
-                @click="deleteTask"
-                >Delete
-                <v-icon icon="mdi-delete"></v-icon>
-              </v-btn>
+              
               <!-- </div> -->
-            </v-chip-group>
-          </div>
-        </v-card>
-      </template>
+            <!-- </v-chip-group>
+          </div> -->
+        <!-- </v-card>
+      </template> -->
     </v-card>
   </v-container>
   <v-footer
@@ -154,6 +171,7 @@
       },
       deleteTask(id) {
         this.tasks = this.tasks.filter(task => task.taskId !== id)
+        console.log(this.tasks);
       }
     }
   }
