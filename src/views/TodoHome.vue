@@ -170,7 +170,18 @@
         console.log(newTask);
         console.log(this.tasks);
       },
-      deleteTask(id) {
+      deleteTask() {
+        const tasksProxy = new Proxy(this.tasks, {
+          get: (obj, prop) => {
+            console.log(`The value of ${prop} is ${Reflect.get(obj, prop)}`);
+          },
+          set: (obj, prop, value) => {
+            console.log(`Changed ${prop} from ${obj[prop]} to ${value}`);
+            Reflect.set(obj, prop, value);
+          }
+        })
+
+        let id = tasksProxy.taskId
         this.tasks = this.tasks.filter(task => task.taskId !== id)
         console.log(this.tasks);
         console.log(id);
