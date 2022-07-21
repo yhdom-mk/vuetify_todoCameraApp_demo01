@@ -49,7 +49,7 @@
             @click="deleteTask"
             color="red"
             variant="text"
-            >Delete
+            >Delete{{ task.taskId}}
             <v-icon icon="mdi-delete"></v-icon>
           </v-btn>  
         </div>
@@ -168,11 +168,77 @@
         this.tasks.push(newTask)
         // console.log('add Task');
         console.log(newTask);
+        console.log(this.tasks);
       },
       deleteTask(id) {
         this.tasks = this.tasks.filter(task => task.taskId !== id)
         console.log(this.tasks);
+        console.log(id);
       }
     }
   }
+
+//   ref setup を使用するコード
+  // import { ref } from 'vue'
+  // export default {
+  //   newTask: '',
+  //   tasks: [
+  //     {
+  //       taskId: 1,
+  //       taskTitle:"Wake up early, for three weeks",
+  //       subTitle: "It is starting in a Good day",
+  //       photoImages: "https://picsum.photos/512/128?image=660",
+  //       textComents: "If you wake up earliy, you get something you unexpected.",
+  //       done: false
+  //     },
+  //     {
+  //       taskId: 2,
+  //       taskTitle:"Study AWS",
+  //       subTitle: "you should study cloudService in AWS",
+  //       photoImages: "https://picsum.photos/512/128?random",
+  //       textComents: "you look around, CloudService run anywhere.",
+  //       done: true
+  //     },
+  //     {
+  //       taskId: 3,
+  //       taskTitle:"Program in TypeScript",
+  //       subTitle: "It is important to keep typping in laung",
+  //       photoImages: "https://picsum.photos/512/128?image=660",
+  //       textComents: "you code in Vue, you must undersatand it in Typescript.",
+  //       done: true
+  //     },
+  //   ],
+  //   setup() {
+  //     const tasks = ref([])
+
+  //     const doneTask = (id)=> {
+  //       let task = this.tasks.filter(task => task.taskId === id)[0]
+  //       task.done = !task.done
+  //       // console.log(taskId);
+  //     }
+
+  //     const addTask = ()=> {
+  //       let newTask = {
+  //         taskId: Date.now(),
+  //         taskTitle: this.newTaskTitle,
+  //         subTitle: "It is important to keep typping in laung",
+  //         photoImages: "https://picsum.photos/512/128?random",
+  //         textComents: "you code in Vue, you must undersatand it in Typescript.",
+  //         done: false
+  //       }
+  //       this.tasks.push(newTask)
+  //       // console.log('add Task');
+  //       console.log(newTask);
+  //       console.log(this.tasks);
+  //     }
+      
+  //     const deleteTask = ()=> {
+  //       let id = this.tasks.taskId
+  //       this.tasks = this.tasks.filter(task => task.taskId !== id)
+  //       console.log(this.tasks);
+  //       console.log(id);
+  //     }
+  //     return { tasks, doneTask, addTask, deleteTask }
+  //   }
+  // }
 </script>
