@@ -12,7 +12,12 @@ const routes = [
     path: '/photo',
     name: 'Photo',
     component: ()=> import ('../views/TodoPhotos.vue')
-  }
+  },
+  {
+    path: '/camera',
+    name: 'Camera',
+    component: ()=> import ('../components/PageCamera.vue')
+  },
 ]
 
 const router = createRouter({

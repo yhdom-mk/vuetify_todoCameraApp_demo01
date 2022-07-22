@@ -8,15 +8,14 @@
       >
         <v-app-bar-nav-icon variant="text" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Vuetify Todo App</v-toolbar-title>
+        <v-toolbar-title>Vuetify TodoApp</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
         <v-btn variant="text" icon="mdi-magnify"></v-btn>
-
         <v-btn variant="text" icon="mdi-filter"></v-btn>
-
         <v-btn variant="text" icon="mdi-plus"></v-btn>
+        <v-btn variant="text" icon="mdi-camera" @click="goToCamera()"></v-btn>
       </v-app-bar>
       <!-- <v-app-bar app>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -30,10 +29,10 @@
       >
       <v-list density="compact">
         <v-list-item-header>
-          <v-list-item-title class="text-h6">
-            Vuetify Todo
+          <v-list-item-title class="text-h6 px-4">
+            Vuetify Page
           </v-list-item-title>
-          <v-list-item-subtitle>
+          <v-list-item-subtitle class="px-4">
             To use Camera for your TODO
           </v-list-item-subtitle>
         </v-list-item-header>
@@ -91,6 +90,7 @@
 </template>
 
 <script>
+  import router from './router'
   export default {
     props: {
       // activityType: {
@@ -130,6 +130,11 @@
       //   learning_material_article: "mdi-script-text-outline",
       // }//[this.iconType] || 'mdi-script-text-outline',
     }),
+    methods: {
+      goToCamera() {
+        router.push('/camera')
+      }
+    },
     mounted(){
       // this.iconName = this.iconMapping[this.iconType]
     },
