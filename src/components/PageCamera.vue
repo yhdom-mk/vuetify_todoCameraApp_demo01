@@ -1,14 +1,23 @@
 <template>
+  <div class="home pa-6">
+    <h2>Camera Page</h2>
+  </div>
   <v-container>
-    <v-row class="text-center">
+    <v-row>
       <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
+        <v-card>
+            <v-img
+              src="https://picsum.photos/350/165?random"
+              height="300"
+              class="camera-frame"
+            ></v-img>
+          </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<style lang="sass">
+  .camera-frame
+    border: 2px solid
+</style>
