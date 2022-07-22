@@ -9,13 +9,34 @@
         :key="n"
         cols="3"
       >
-        <v-sheet
+        <v-img
+          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+          aspect-ratio="1"
+          cover
+          class="bg-grey-lighten-2"
+        >
+          <template v-slot:placeholder>
+            <v-row
+              class="fill-height ma-0"
+              align="center"
+              justify="center"
+            >
+              <v-progress-circular
+                indeterminate
+                color="grey-lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+        <!-- <v-sheet
           color="grey-lighten-2"
           height="96"
-        ></v-sheet>
+        ></v-sheet> -->
       </v-col>
     </v-row>
   </v-container>
+
   <v-footer class="d-flex flex-column">
     <div class="bg-teal d-flex w-100 align-center px-4">
       <strong class="text-white">Get connected with us on social networks!</strong>
