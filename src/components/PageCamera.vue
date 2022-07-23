@@ -15,6 +15,51 @@
       </v-col>
     </v-row>
   </v-container>
+  <div class="d-flex justify-space-around align-center">
+    <v-btn
+      color=#E0E0E0
+      icon="mdi-camera"
+    ></v-btn>
+  </div>
+  <div class="px-4">
+    <v-text-field
+      class="pa-3"
+      variant="underlined"
+      label="Todo"
+      hide-details="true"
+      clearable
+    ></v-text-field>
+  </div>
+  <div class="px-4">
+    <v-text-field
+      class="pa-3"
+      variant="underlined"
+      label="SubTitle"
+      hide-details="true"
+      clearable
+    ></v-text-field>
+  </div>
+  <div class="px-4">
+    <v-text-field
+      class="pa-3"
+      variant="underlined"
+      label="Context"
+      hide-details="true"
+      clearable
+    ></v-text-field>
+  </div>
+  <div class="d-flex justify-space-around align-center mb-lg">
+    <v-btn
+      rounded="lg"
+      color=#00BFA5
+    >Add</v-btn>
+  </div>
+  <!-- v-model="newTaskTitle"
+    @keyup.enter="addTask"
+    @click:append="addTask" -->
+  <v-footer
+    class="bg-grey-lighten-1"
+  ></v-footer>
 </template>
 
 <style lang="sass">
