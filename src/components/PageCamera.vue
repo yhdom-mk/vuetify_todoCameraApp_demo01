@@ -81,10 +81,17 @@
 
 <script>
 require('md-gum-polyfill')
+import { uuid } from 'vue-uuid'
 
 export default {
   name: 'PageCamera',
   data: ()=> ({
+    post: {
+      id: uuid.v4(),
+      caption: '',
+      photo: null,
+      date: Date.now()
+    },
     imageCaptured: false
   }),
   methods: {
