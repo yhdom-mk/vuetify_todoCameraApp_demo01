@@ -7,10 +7,17 @@
       <v-col cols="12">
         <v-card>
           <video
+            v-show="!imageCaptured"
             ref="video"
             class="full-width"
             autoplay
           ></video>
+          <canvas
+            v-show="imageCaptured"
+            ref='canvas'
+            class="full-width"
+            height="320"
+            ></canvas>
             <!-- <v-img
               src="https://picsum.photos/350/165?random"
               height="300"
@@ -22,6 +29,7 @@
   </v-container>
   <div class="d-flex justify-space-around align-center">
     <v-btn
+      @click="captureImage"
       color=#E0E0E0
       icon="mdi-camera"
     ></v-btn>
@@ -55,9 +63,13 @@
   </div>
   <div class="d-flex justify-space-around align-center mb-lg">
     <v-btn
-      rounded="lg"
+      rounded="pill"
       color=#00BFA5
-    >Add</v-btn>
+    >POST IMAGE</v-btn>
+    <v-btn
+      rounded="pill"
+      color=#00BFA5
+    >ADD TODO</v-btn>
   </div>
   <!-- v-model="newTaskTitle"
     @keyup.enter="addTask"
@@ -68,7 +80,13 @@
 </template>
 
 <script>
-export default({
+require('md-gum-polyfill')
+
+export default {
+  name: 'PageCamera',
+  data: ()=> ({
+    imageCaptured: false
+  }),
   methods: {
     initCamera() {
       navigator.mediaDevices.getUserMedia({
@@ -77,6 +95,15 @@ export default({
         this.$refs.video.srcObject = stream
       })
       // console.log('init Camera');
+    },
+    captureImage() {
+      let video = this.$refs.video
+      let canvas = this.$refs.canvas
+      canvas.width = video.getBoundingClientRect().width
+      canvas.height = video.getBoundingClientRect().height
+      let context = canvas.getContext('2d')
+      context.drawImage(video, 0, 0, canvas.width, canvas.height)
+      this.imageCaptured = true
     }
   },
   mounted() {
@@ -91,7 +118,7 @@ export default({
   // onMounted() {
 
   // }
-})
+}
 </script>
 
 
