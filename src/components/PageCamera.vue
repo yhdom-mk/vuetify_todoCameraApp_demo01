@@ -38,7 +38,7 @@
   <v-file-input
     v-if="!hasCameraSupport"
     v-model="imageUpload"
-    @input="captureImageFallback"
+    @change="captureImageFallback"
     class="px-6"
     accept="image/*"
     label="Choose an Image File"
@@ -125,6 +125,27 @@ export default {
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.imageCaptured = true
       this.post.photo = this.dataURItoBlob(canvas.toDataURL())
+    },
+    captureImageFallback(file) {
+      this.post.photo = file.target.files[0]
+      // console.log('file:', file)
+      console.log('photo:', this.post.photo)
+
+      let canvas = this.$refs.canvas
+      let context = canvas.getContext('2d')
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          context.drawImage(img, 0, 0);
+        }
+        img.src = event.target.result;
+      }
+      reader.readAsDataURL(file.target.files[0]);
+      this.imageCaptured = true
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
