@@ -5,7 +5,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-card>
+        <v-card class="camera-frame">
           <video
             v-show="!imageCaptured"
             ref="video"
@@ -121,6 +121,7 @@ export default {
       let canvas = this.$refs.canvas
       canvas.width = video.getBoundingClientRect().width
       canvas.height = video.getBoundingClientRect().height
+
       let context = canvas.getContext('2d')
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.imageCaptured = true
