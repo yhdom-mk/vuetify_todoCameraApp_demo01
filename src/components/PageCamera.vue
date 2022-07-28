@@ -43,8 +43,16 @@
     accept="image/*"
     label="Choose an Image File"
   ></v-file-input>
+  <!-- <div class="d-flex justify-space-around align-center px-4">
+    <v-btn
+      class="white--text"
+      rounded="pill"
+      color=#00BFA5
+    >POST IMAGE</v-btn>
+  </div> -->
   <div class="px-4">
     <v-text-field
+      v-model="newTodoTitle"
       class="pa-3"
       variant="underlined"
       label="Todo"
@@ -54,6 +62,7 @@
   </div>
   <div class="px-4">
     <v-text-field
+      v-model="newTodoSubTitle"
       class="pa-3"
       variant="underlined"
       label="SubTitle"
@@ -63,6 +72,7 @@
   </div>
   <div class="px-4">
     <v-text-field
+      v-model="newTodoTextcoments"
       class="pa-3"
       variant="underlined"
       label="Context"
@@ -72,10 +82,7 @@
   </div>
   <div class="d-flex justify-space-around align-center mb-lg">
     <v-btn
-      rounded="pill"
-      color=#00BFA5
-    >POST IMAGE</v-btn>
-    <v-btn
+      @click="addNewTodotask"
       rounded="pill"
       color=#00BFA5
     >ADD TODO</v-btn>
@@ -103,7 +110,11 @@ export default {
     },
     imageCaptured: false,
     imageUpload: [],
-    hasCameraSupport: true
+    hasCameraSupport: true,
+    newTask: [],
+    newTodoTitle: '',
+    newTodoSubTitle: '',
+    newTodoTextcoments: '',
   }),
   methods: {
     initCamera() {
@@ -176,6 +187,20 @@ export default {
       // write the ArrayBuffer to a blob, and you're done
       var blob = new Blob([ab], {type: mimeString});
       return blob;
+    },
+    addNewTodotask() {
+      let newTask = {
+        taskId: Date.now(),
+        taskTitle: this.newTodoTitle,
+        subTitle: this.newTodoSubTitle,
+        photoImages: this.post.photo,
+        textComents: this.newTodoTextcoments,
+        done: false
+      }
+      this.newTask.push(newTask)
+      console.log(newTask)
+      
+      this.$emit('sendNewTask', this.newTask)
     }
   },
   mounted() {
