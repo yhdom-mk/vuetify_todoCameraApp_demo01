@@ -2,8 +2,12 @@
   <div class="home pa-6">
     <h2>Todo Page</h2>
   </div>
-  
-  <div class="px-4">
+  <template>
+    <div id="pagecamera">
+      <pagecamera v-on:sendNewTask="addTask"></pagecamera>
+    </div>
+  </template>
+  <!-- <div class="px-4">
     <v-text-field
       v-model="newTaskTitle"
       @click:append="addTask"
@@ -15,7 +19,7 @@
       hide-details="true"
       clearable
     ></v-text-field>
-  </div>
+  </div> -->
  
   <v-container fluid>
     <v-card
@@ -111,7 +115,13 @@
   </v-footer>
 </template>
 <script>
+import PageCamera from '../components/PageCamera.vue'
+
   export default {
+    components: {
+      pagecamera: PageCamera
+    },
+    emits: ['sendNewTask'],
     data: () => ({
       links: [
         'Home',
@@ -156,21 +166,22 @@
         task.done = !task.done
         // console.log(taskId);
       },
-      addTask() {
-        let newTask = {
-          taskId: Date.now(),
-          taskTitle: this.newTaskTitle,
-          subTitle: "It is important to keep typping in laung",
-          photoImages: "https://picsum.photos/512/128?random",
-          textComents: "you code in Vue, you must undersatand it in Typescript.",
-          done: false
-        }
+      addTask(newTask) {
+        // let newTask = newTask
+        // {
+          // taskId: Date.now(),
+          // taskTitle: this.newTaskTitle,
+          // subTitle: "It is important to keep typping in laung",
+          // photoImages: "https://picsum.photos/512/128?random",
+          // textComents: "you code in Vue, you must undersatand it in Typescript.",
+          // done: false
+        // }
         this.tasks.push(newTask)
         // console.log('add Task');
-        console.log(newTask);
+        // console.log(newTask);
         console.log(this.tasks);
       },
-      deleteTask() {
+      deleteTask(id) {
         const tasksProxy = new Proxy(this.tasks, {
           get: (obj, prop) => {
             console.log(`The value of ${prop} is ${Reflect.get(obj, prop)}`);
@@ -181,10 +192,11 @@
           }
         })
 
-        let id = tasksProxy.taskId
+        id = tasksProxy.taskId
         this.tasks = this.tasks.filter(task => task.taskId !== id)
         console.log(this.tasks);
-        console.log(id);
+        // console.log(id);
+        console.log(tasksProxy);
       }
     }
   }
