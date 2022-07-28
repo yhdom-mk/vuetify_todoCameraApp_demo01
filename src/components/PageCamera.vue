@@ -101,6 +101,7 @@ import { uuid } from 'vue-uuid'
 
 export default {
   name: 'PageCamera',
+  emits: ['sendNewTask'],
   data: ()=> ({
     post: {
       id: uuid.v4(),
@@ -199,7 +200,7 @@ export default {
       }
       this.newTask.push(newTask)
       console.log(newTask)
-      
+
       this.$emit('sendNewTask', this.newTask)
     }
   },
