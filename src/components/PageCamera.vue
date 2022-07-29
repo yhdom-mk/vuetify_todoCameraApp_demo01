@@ -102,6 +102,7 @@ import { uuid } from 'vue-uuid'
 export default {
   name: 'PageCamera',
   emits: ['sendNewTask'],
+  // props: ['tasks'],
   data: ()=> ({
     post: {
       id: uuid.v4(),
@@ -190,7 +191,7 @@ export default {
       return blob;
     },
     addNewTodotask() {
-      let newTask = {
+      let anewTask = {
         taskId: Date.now(),
         taskTitle: this.newTodoTitle,
         subTitle: this.newTodoSubTitle,
@@ -198,10 +199,10 @@ export default {
         textComents: this.newTodoTextcoments,
         done: false
       }
-      this.newTask.push(newTask)
-      console.log(newTask)
+      this.newTask.push(anewTask)
+      console.log(this.newTask)
 
-      this.$emit('sendNewTask', this.newTask)
+      this.$emit('sendNewTask', anewTask)
     }
   },
   mounted() {
