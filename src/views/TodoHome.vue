@@ -3,9 +3,11 @@
     <h2>Todo Page</h2>
   </div>
   <template>
-    <div id="pagecamera">
-      <pagecamera v-on:sendNewTask="addTask"></pagecamera>
-    </div>
+    <!-- <div id="pagecamera"> -->
+      <pagecamera v-on:sendNewTask="addTask()"></pagecamera>
+      <!-- <v-card-text>{{ newTask.textComents }}</v-card-text>
+      <v-img v-bind:src="newTask.photoImages" height="128" cover></v-img> -->
+    <!-- </div> -->
   </template>
   <!-- <div class="px-4">
     <v-text-field
@@ -121,7 +123,7 @@ import PageCamera from '../components/PageCamera.vue'
     components: {
       pagecamera: PageCamera
     },
-    emits: ['sendNewTask'],
+    // emits: ['sendNewTask'],
     data: () => ({
       links: [
         'Home',
@@ -131,7 +133,7 @@ import PageCamera from '../components/PageCamera.vue'
         'Blog',
         'Contact Us',
       ],
-      newTaskTitle: '',
+      newTask: '',
       tasks: [
         {
           taskId: 1,
@@ -166,7 +168,8 @@ import PageCamera from '../components/PageCamera.vue'
         task.done = !task.done
         // console.log(taskId);
       },
-      addTask(newTask) {
+      addTask(value) {
+        this.newTask = value
         // let newTask = newTask
         // {
           // taskId: Date.now(),
@@ -176,10 +179,10 @@ import PageCamera from '../components/PageCamera.vue'
           // textComents: "you code in Vue, you must undersatand it in Typescript.",
           // done: false
         // }
-        this.tasks.push(newTask)
+        this.tasks.push(value)
         // console.log('add Task');
-        // console.log(newTask);
-        console.log(this.tasks);
+        console.log(this.newTask);
+        // console.log(this.tasks);
       },
       deleteTask(id) {
         const tasksProxy = new Proxy(this.tasks, {
