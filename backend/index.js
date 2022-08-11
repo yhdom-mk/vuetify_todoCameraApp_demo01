@@ -1,6 +1,8 @@
 const express = require('express')
+const busboy = require('connect-busboy')
+
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.get('/posts', (req, res) => {
   // res.send('I move on Node.js a single day.')
@@ -16,6 +18,21 @@ app.get('/posts', (req, res) => {
   ]
   res.send(posts)
 })
+
+app.use(busboy())
+
+//busboy post example
+// app.post('/uploadFile', (req, res) => {
+//   req.busboy.on('file', function (fieldname, file, filename) {
+//     console.log("received file")
+//     var fstream = fs.createWriteStream('./uploads/' + filename);
+//     file.pipe(fstream);
+//     fstream.on('close', function () {
+//       res.send('upload succeeded!');
+//     });
+//   });
+//   req.pipe(req.busboy);
+// })
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
