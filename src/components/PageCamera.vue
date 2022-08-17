@@ -205,6 +205,14 @@ export default {
       console.log(this.newTask)
 
       this.$emit('sendNewTask', anewTask)
+
+      //notify 機能（仮）
+      // notify({
+      //   message; 'Post Created!',
+      //   actions: [{
+      //     labal: 'Dismiss', color: 'White'
+      //   }]
+      // })
     }
   },
   mounted() {
