@@ -31,6 +31,7 @@
     <v-btn
       v-if="hasCameraSupport"
       @click="captureImage"
+      :disable="imageCaptured"
       color=#E0E0E0
       icon="mdi-camera"
     ></v-btn>
@@ -83,6 +84,7 @@
   <div class="d-flex justify-space-around align-center mb-lg">
     <v-btn
       @click="addNewTodotask"
+      :disable="!post.taskTitle || !post.photo"
       rounded="pill"
       color=#00BFA5
     >ADD TODO</v-btn>
